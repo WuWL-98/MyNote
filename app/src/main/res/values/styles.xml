@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!-- colorPrimary 标题栏背景颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- colorPrimaryDark 状态栏背景色-->
+        <item name="colorPrimaryDark">@color/colorTransprent</item>
+        <!-- colorAccent 各控制元件(如：check box、switch 或是 radoi) 被勾选 (checked) 或是选定 (selected) 的颜色。-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowBackground">@drawable/repeat_bg</item>
+    </style>
+
+
+</resources>
