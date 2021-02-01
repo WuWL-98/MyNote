@@ -32,11 +32,9 @@ public class ShowContent extends BaseActivity {
     private ImageView ibt_save;
     private final String AUTO_SAVE = "auto_save";
     private final String MANUAL_SAVE = "manual_save";
+    private int mNoteID;
     private Handler mHandler;
     private Runnable runnable;
-//    private String imgPath = "IMG";
-//    private String res = null;
-//    private int index = 1;
 
 
     @Override
@@ -51,10 +49,8 @@ public class ShowContent extends BaseActivity {
         mDb = new NoteDb(this);
         mSql = mDb.getWritableDatabase();
         mTextview.setHtml(getIntent().getStringExtra(NoteDb.CONTENT));
-//        mTextview.setInputEnabled(false);
         time.setTextColor(this.getResources().getColor(R.color.colorBlack));
         time.setText(getIntent().getStringExtra(NoteDb.TIME));
-//        Glide.with(ShowContent.this).load(getIntent().getStringExtra(NoteDb.imagePath)).into(iv_image);
         ibt_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +66,8 @@ public class ShowContent extends BaseActivity {
     }
 
     public void delete() {
-        int id = getIntent().getIntExtra(NoteDb.ID, 0);
-        mSql.delete(NoteDb.TABLE_NAME, " _id = " + id, null);
+        mNoteID = getIntent().getIntExtra(NoteDb.ID, 0);
+        mSql.delete(NoteDb.TABLE_NAME, " _id = " + mNoteID, null);
         finish();
 
     }
@@ -80,29 +76,11 @@ public class ShowContent extends BaseActivity {
         finish();
     }
 
-//    private String getEditData() {
-//        StringBuilder content = new StringBuilder();
-//        try {
-//            List<RichTextEditor.EditData> editList = mTextview.buildEditData();
-//            for (RichTextEditor.EditData itemData : editList) {
-//                if (itemData.inputStr != null) {
-//                    content.append(itemData.inputStr);
-//                } else if (itemData.imagePath != null) {
-//                    content.append("<img src=\"").append(itemData.imagePath).append("\"/>");
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return content.toString();
-//    }
-
-
     public void save(String type) {
-        int id = getIntent().getIntExtra(NoteDb.ID, 0);
+        mNoteID = getIntent().getIntExtra(NoteDb.ID, 0);
         ContentValues cv = new ContentValues();
         cv.put(NoteDb.CONTENT, mTextview.getHtml());
-        mSql.update(NoteDb.TABLE_NAME, cv, "_id = " + id, null);
+        mSql.update(NoteDb.TABLE_NAME, cv, "_id = " + mNoteID, null);
         if (!type.equals(AUTO_SAVE)) {
             finish();
         }
@@ -122,43 +100,11 @@ public class ShowContent extends BaseActivity {
                     Uri uri = data.getData();
                     ContentResolver contentResolver = ShowContent.this.getContentResolver();
                     Bitmap bitmap;
-                    Bundle extras = null;
                     bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri));
-                    /*int imgWidth = bitmap.getWidth();
-                    int imgHeight = bitmap.getHeight();
-                    double partion = imgWidth * 1.0 / imgHeight;
-                    double sqrtLength = Math.sqrt(partion * partion + 1);
-                    //新的缩略图大小
-                    double newImgW = 1000 * (partion / sqrtLength);
-                    double newImgH = 1000 * (1 / sqrtLength);
-                    float scaleW = (float) (newImgW / imgWidth);
-                    float scaleH = (float) (newImgH / imgHeight);
-                    Matrix mx = new Matrix();
-                    //对原图片进行缩放
-                    mx.postScale(scaleW, scaleH);
-                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, imgWidth, imgHeight, mx, true);*/
-//                    iv_image.setImageBitmap(bitmap);
-                    //String imgPath = SDCardUtil.saveToSdCard(bitmap);
-                    String imgPath = SDCardUtil.saveMyBitmap(bitmap, System.currentTimeMillis() + "");
-                    //Glide.with(AddContent.this).load(imgPath).into(iv_image);
+                    String imgPath = SDCardUtil.saveMyBitmap(bitmap, System.currentTimeMillis() + "");//System.currentTimeMillis()用来获取时间来对图片文件进行命名
                     Log.e("imgPath", imgPath);
                     mTextview.focusEditor();
                     mTextview.insertImage(imgPath, "sloop");
-                    //final ImageSpan imageSpan = new ImageSpan(this, bitmap);
-                    /*  String imgPath = SDCardUtil.saveToSdCard(bitmap);
-                     *//*SpannableString spannableString = new SpannableString("<img src=" + imgPath + " />");
-                    spannableString.setSpan(imageSpan, 0, spannableString.length(), SpannableString.SPAN_MARK_MARK);
-                    //光标移到下一行
-                    mTextview.append("\n");
-                    Editable editable = mTextview.getEditableText();
-                    int selectionIndex = mTextview.getSelectionStart();
-                    spannableString.getSpans(0, spannableString.length(), ImageSpan.class);
-                    //将图片添加进EditText中
-                    editable.insert(selectionIndex, spannableString);
-                    //添加图片后自动空出两行
-                    mTextview.append("\n");*//*
-
-                     */
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

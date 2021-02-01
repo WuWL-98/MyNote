@@ -53,7 +53,6 @@ public class AddContent extends BaseActivity implements PermissionsUtil.IPermiss
     public void DbAdd() {
         ContentValues cv = new ContentValues();
         cv.put(NoteDb.CONTENT, contentTv.getHtml());
-        cv.put(NoteDb.imagePath, imagePath);
         cv.put(NoteDb.TIME, getTime());
         mSqldb.insert(NoteDb.TABLE_NAME, null, cv);
     }
@@ -96,7 +95,7 @@ public class AddContent extends BaseActivity implements PermissionsUtil.IPermiss
                     Bitmap bitmap;
                     bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri));
                     String imgPath = SDCardUtil.saveMyBitmap(bitmap, System.currentTimeMillis() + "");
-                    Log.e("imgPath", imgPath);
+                    Log.e("ADD_imgPath:", imgPath);
                     imagePath = imgPath;
                     contentTv.focusEditor();
                     contentTv.insertImage(imagePath, "sloop");
