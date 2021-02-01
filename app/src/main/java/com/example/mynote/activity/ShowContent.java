@@ -34,9 +34,9 @@ public class ShowContent extends BaseActivity {
     private final String MANUAL_SAVE = "manual_save";
     private Handler mHandler;
     private Runnable runnable;
-    private String imgPath = "IMG";
-    private String res = null;
-    private int index = 1;
+//    private String imgPath = "IMG";
+//    private String res = null;
+//    private int index = 1;
 
 
     @Override
@@ -103,7 +103,7 @@ public class ShowContent extends BaseActivity {
         ContentValues cv = new ContentValues();
         cv.put(NoteDb.CONTENT, mTextview.getHtml());
         mSql.update(NoteDb.TABLE_NAME, cv, "_id = " + id, null);
-        if (!type.equals("AUTO_SAVE")) {
+        if (!type.equals(AUTO_SAVE)) {
             finish();
         }
     }
@@ -176,12 +176,12 @@ public class ShowContent extends BaseActivity {
         runnable = new Runnable() {
             @Override
             public void run() {
-                mHandler.postDelayed(this, 60000);
+                mHandler.postDelayed(this, 10000);
                 Toast.makeText(ShowContent.this, "自动保存成功", Toast.LENGTH_SHORT).show();
                 save(AUTO_SAVE);
             }
         };
-        mHandler.postDelayed(runnable, 60000);
+        mHandler.postDelayed(runnable, 10000);
     }
 
     @Override
