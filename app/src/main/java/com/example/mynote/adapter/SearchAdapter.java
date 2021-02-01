@@ -12,12 +12,12 @@ import android.widget.TextView;
 import com.example.mynote.R;
 
 
-public class MyAdapter extends BaseAdapter {
+public class SearchAdapter extends BaseAdapter {
     private Context mContext;
     private Cursor mCursor;
     private LinearLayout mLayout;
 
-    public MyAdapter(Context mContext, Cursor mCursor) {
+    public SearchAdapter(Context mContext, Cursor mCursor) {
         this.mContext = mContext;
         this.mCursor = mCursor;
     }

@@ -15,14 +15,14 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 
 import com.example.mynote.R;
-import com.example.mynote.adapter.MyAdapter;
+import com.example.mynote.adapter.SearchAdapter;
 import com.example.mynote.db.NoteDb;
 
 public class SearchActivity extends BaseActivity {
     private EditText mEtSearch;
     private ListView mList;
     private Cursor cursor;
-    private MyAdapter myAdapter;
+    private SearchAdapter myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,7 @@ public class SearchActivity extends BaseActivity {
             NoteDb mNotedb = new NoteDb(this);
             SQLiteDatabase sql = mNotedb.getReadableDatabase();
             cursor = sql.rawQuery("SELECT * FROM "+NoteDb.TABLE_NAME+" WHERE "+NoteDb.CONTENT+" LIKE '%"+findText+"%'",null);
-            myAdapter = new MyAdapter(this,cursor);
+            myAdapter = new SearchAdapter(this,cursor);
             mList.setAdapter(myAdapter);
         }else {
             mList.setAdapter(null);
