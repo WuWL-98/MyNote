@@ -21,6 +21,27 @@ android {
         }
     }
 
+    configurations.all {
+        resolutionStrategy {
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'androidx.core') {
+                    details.useVersion "1.1.0"
+                }
+                if (details.requested.group == 'androidx.lifecycle') {
+                    details.useVersion "2.0.0"
+                }
+                if (details.requested.group == 'androidx.versionedparcelable') {
+                    details.useVersion "1.0.0"
+                }
+                if (details.requested.group == 'androidx.fragment') {
+                    details.useVersion "1.0.0"
+                }
+                if (details.requested.group == 'androidx.appcompat') {
+                    details.useVersion "1.0.1"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -32,6 +53,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //noinspection GradleCompatible
     implementation 'com.android.support:design:22.2.0'
-    compile 'com.android.support:recyclerview-v7:29.+'
+    implementation 'com.github.sendtion:XRichText:1.9.4'
+    implementation ('com.github.sendtion:XRichText:1.9.4') {
+        exclude group: 'com.android.support'
+    }
 }

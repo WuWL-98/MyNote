@@ -16,7 +16,8 @@ public class MyAdapter extends BaseAdapter {
     private Context mContext;
     private Cursor mCursor;
     private LinearLayout mLayout;
-    public MyAdapter(Context mContext,Cursor mCursor) {
+
+    public MyAdapter(Context mContext, Cursor mCursor) {
         this.mContext = mContext;
         this.mCursor = mCursor;
     }
@@ -39,15 +40,16 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        mLayout = (LinearLayout) inflater.inflate(R.layout.item,null);
+        mLayout = (LinearLayout) inflater.inflate(R.layout.item, null);
         TextView content = (TextView) mLayout.findViewById(R.id.tv_content);
         TextView time = (TextView) mLayout.findViewById(R.id.tv_time);
         mCursor.moveToPosition(position);
         String dbcontext1 = mCursor.getString(mCursor.getColumnIndex("content"));
+//        dbcontext1 = RegularUtil.extractCnAndDigi(dbcontext1);
         //如果字符串长度超过18，那么取前18，再加一个省略号，如果不超过18，则用原始字符串
         String dbcontext = dbcontext1;
-        if (dbcontext1.length()>=18){
-            dbcontext=dbcontext1.substring(0,18)+"……";
+        if (dbcontext1.length() >= 18) {
+            dbcontext = dbcontext1.substring(0, 18) + "……";
         }
         String dbtime = mCursor.getString(mCursor.getColumnIndex("time"));
         content.setText(dbcontext);

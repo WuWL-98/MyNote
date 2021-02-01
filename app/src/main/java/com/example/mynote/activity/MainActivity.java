@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent(MainActivity.this, ShowContent.class);
                 intent.putExtra(NoteDb.ID, cursor.getInt(cursor.getColumnIndex(NoteDb.ID)));
                 intent.putExtra(NoteDb.CONTENT, cursor.getString(cursor.getColumnIndex(NoteDb.CONTENT)));
+                intent.putExtra(NoteDb.imagePath, cursor.getString(cursor.getColumnIndex(NoteDb.imagePath)));
                 intent.putExtra(NoteDb.TIME, cursor.getString(cursor.getColumnIndex(NoteDb.TIME)));
                 startActivity(intent);
             }

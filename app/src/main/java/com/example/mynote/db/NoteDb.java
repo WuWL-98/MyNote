@@ -9,14 +9,17 @@ public class NoteDb extends SQLiteOpenHelper {
     public static final String CONTENT = "content";
     public static final String ID = "_id";
     public static final String TIME = "time";
+    public static final String imagePath = "path";
     public NoteDb(Context context) {
         super(context, "notes", null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql ="create table "+TABLE_NAME+" ( "+ID+" integer primary key AUTOINCREMENT, "+CONTENT
-                +" TEXT NOT NULL, "+TIME+" TEXT NOT NULL )";
+        String sql ="create table "+TABLE_NAME+" ( "+ID+" integer primary key AUTOINCREMENT, "
+                +CONTENT +" TEXT NOT NULL, "
+                +imagePath +" TEXT NOT NULL, "
+                +TIME+" TEXT NOT NULL )";
         db.execSQL(sql);
     }
 

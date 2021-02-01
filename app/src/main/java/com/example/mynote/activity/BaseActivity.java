@@ -1,11 +1,11 @@
 package com.example.mynote.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mynote.R;
-import com.example.mynote.util.StatusBarUtil;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -13,7 +13,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        //调用工具类，使得状态栏字体变黑
-        StatusBarUtil.setStatusBarLightMode(getWindow());
+        //使得状态栏字体变黑
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
     }
 }
