@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,7 @@ import com.example.mynote.R;
 import com.example.mynote.adapter.MainAdapter;
 import com.example.mynote.db.NoteDb;
 
-public class MainActivity extends BaseActivity {
+public class    MainActivity extends BaseActivity {
     private Intent mIntent;
     private NoteDb mNotedb;
     private Cursor cursor;
@@ -58,7 +57,6 @@ public class MainActivity extends BaseActivity {
         mRvAdapter.setOnItemClickLitener(new MainAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "点击了"+position+"号", Toast.LENGTH_SHORT).show();
                 cursor.moveToPosition(position);
                 Intent intent = new Intent(MainActivity.this, ShowContent.class);
                 intent.putExtra(NoteDb.ID, cursor.getInt(cursor.getColumnIndex(NoteDb.ID)));
